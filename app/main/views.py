@@ -2,7 +2,9 @@ from flask import render_template,request,redirect,url_for
 from . import main
 from .forms import UpdateProfile
 from .. import db,photos
+from ..models import User
 from flask_login import login_required,current_user
+from ..email import mail_message
 
 @main.route('/')
 def index():

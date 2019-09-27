@@ -5,7 +5,6 @@ class Config:
 
     SECRET_KEY = 'juru1'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:  @localhost/blog'
-
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
