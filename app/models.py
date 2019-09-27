@@ -38,4 +38,12 @@ class Blog(db.Model):
     title = db.Column(db.String(255))
     blog = db.Column(db.String(955))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-  
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer,primary_key = True)
+    usernames = db.Column(db.String(255),index = True)
+    comment = db.Column(db.String(255))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    blog_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+

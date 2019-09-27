@@ -23,13 +23,21 @@
 
         <br>
         <br>
+        <div class="jumbtron">
+            <div class="row">
+                {% for word in blog %}
+                <div class="col-md-4">
+                    <p style="color: whitesmoke">Autor: {{word.user.username}}</p>
+                    <p style="color: whitesmoke">Post title: {{word.title}}</p>
+                    <p style="color: whitesmoke"><strong>Your post: {{word.blog}}</strong></p>
+                </div>
 
-        {% for word in blog %}
-        <p style="color: whitesmoke">Autor: {{word.user.username}}</p>
-        <p style="color: whitesmoke">Post title: {{word.title}}</p>
-        <p style="color: whitesmoke"><strong>Your post: {{word.blog}}</strong></p>
 
-        {% endfor %}
+                {% endfor %}
+
+            </div>
+
+        </div>
     </div>
     {% endblock%}
 </body>
