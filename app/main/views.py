@@ -9,9 +9,9 @@ from ..email import mail_message
 @main.route('/')
 def index():
   title="blog"
- 
+  blog = Blog.query.all()
   
-  return render_template('index.html',title=title)
+  return render_template('index.html',title=title, blog = blog)
 
 @main.route('/user/<uname>')
 def profile(uname):
