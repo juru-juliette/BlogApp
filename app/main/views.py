@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for
 from . import main
-from .forms import UpdateProfile
+from .forms import UpdateProfile,BlogForm
 from .. import db,photos
 from ..models import User,Blog
 from flask_login import login_required,current_user
@@ -59,7 +59,7 @@ def blogs():
         title=form.title.data
         blog=form.blog.data
 
-        new_blog=Blog(blog = blog,title = title,user= current_user)
+        new_blog=Blog(title = title,blog = blog,user= current_user)
 
         db.session.add(new_blog)
         db.session.commit()
