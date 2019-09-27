@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block styles%}
     {{ super() }}
@@ -6,21 +7,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+<h1 id="big" style="color:#EEEEEE ; text-align: center;font-size:90px;font-style:oblique">My Blog</h1>
 
-            {% if current_user.is_authenticated %}
-            <div>
-
-                    {{ wtf.quick_form(form) }}
-                </div>
-            {% else %}
-            <div class="well-sm">
-                <h2>You Don't Have Account</h2>
-            <p><strong> Dear user,<br>user You seem to have no account, hence you can not create a post or blog.</strong></p>
-            </div>
-            {%endif%}
+<div class="container">
+{{wtf.quick_form(form)}}
 
 
-    </div>
+</div>
 
 {% endblock %}

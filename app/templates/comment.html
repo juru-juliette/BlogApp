@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+        <div>
+
+            {{ wtf.quick_form(form) }}
+        </div>
+    
+        <div class="well-lg">
+            {% for word in comment %}
+            <h4>{{word.usernames}}</h4>
+            <h6>--{{word.comment}}</h6>
+
+
+        <!-- {% if current_user.is_authenticated %}
+        <a href="/delete/new/{{word.id}}"><button><strong>DELETE</strong></button></a>
+        {% else %}
+        <p> </p>
+        {%endif%} -->
+
+            {% endfor %}
+        </div>
+</div>
+{% endblock%}

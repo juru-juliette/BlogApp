@@ -1,43 +1,30 @@
+
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
-<body>
-    {% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-    {% endblock %}
+<!-- Styles block -->
 
-    {% block content %}
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
 
-    <div class="container">
-
-
-        <h1 id="big" style="color:#EEEEEE ; text-align: center;font-size:90px;font-style:oblique">Welcome To BlogApp
-        </h1>
-        {% if current_user.is_authenticated %}
-        <div class="well">
-            <a href="{{ url_for('main.blogs') }}">New Post</a>
-        </div>
-        {% else %}
-        </p>
-        {%endif%}
-
-        <br>
-        <br>
-        <div class="jumbtron">
-            <div class="row">
-                {% for word in blog %}
-                <div class="col-md-4">
-                    <p style="color: whitesmoke">Autor: {{word.user.username}}</p>
-                    <p style="color: whitesmoke">Post title: {{word.title}}</p>
-                    <p style="color: whitesmoke"><strong>Your post: {{word.blog}}</strong></p>
-                </div>
+{% block content %}
+<h1 id="big" style="color:#EEEEEE ; text-align: center;font-size:90px;font-style:oblique">Welcome To BlogApp
+</h1>
 
 
-                {% endfor %}
+<div class="container">
 
-            </div>
+   
 
-        </div>
-    </div>
-    {% endblock%}
-</body>
+</div>
+{{ macro.displayblogs(blogs)}}<br>
+<div class="container">
+    <a href="/blog/new" class="btn btn-primary">Add Blog post</a>
+
+</div>
+
+
+
+{% endblock %}
