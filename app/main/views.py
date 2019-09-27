@@ -52,7 +52,7 @@ def update_pic(uname):
     return redirect(url_for('main.profile',uname=uname))
 # 
 @main.route('/blog/new', methods=['GET','POST'])
-def cdblogs():
+def blogs():
     form = BlogForm()
 
     if form.validate_on_submit():
