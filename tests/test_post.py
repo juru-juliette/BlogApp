@@ -6,7 +6,7 @@ import unittest
 class PostModelTest(unittest.TestCase):
    def setUp(self):
         
-        self.new_post = Post(id=1234,content='blog',title="deal")
+        self.new_post = Post(id=1234,content='Pitch for movies',title="Tech and Game blog")
 
    def tearDown(self):
         
@@ -15,8 +15,8 @@ class PostModelTest(unittest.TestCase):
 
    def test_check_instance_variables(self):
         self.assertEquals(self.new_post.id,1234)
-        self.assertEquals(self.new_post.content,'blog')
-        self.assertEquals(self.new_post.title,"deal")
+        self.assertEquals(self.new_post.content,'Pitch for movies')
+        self.assertEquals(self.new_post.title,"Tech and Game blog")
         
 
    def test_save_post(self):
