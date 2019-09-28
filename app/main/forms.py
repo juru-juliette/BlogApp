@@ -7,11 +7,20 @@ class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
     submit = SubmitField('Submit')
 
-class BlogForm(FlaskForm):
-    title = StringField('Post your title',validators=[Required()])
-    blog = TextAreaField('Post It Here', validators=[Required()])
-    submit = SubmitField('Post')
+class AddPostForm(FlaskForm):
+    title=StringField('Title',validators = [Required()])
+    content=TextAreaField('Content',validators = [Required()])
+    image=StringField('Image url',validators = [Required()])
+    submit=SubmitField('SUBMIT')
+
+class UpdatePostForm(FlaskForm):
+    title=StringField('Title',validators = [Required()])
+    content=TextAreaField('Content',validators = [Required()])
+    submit=SubmitField('SUBMIT')
+
 class CommentForm(FlaskForm):
-    usernames = TextAreaField('User Name', validators=[Required()])
-    comment = TextAreaField('Comment', validators=[Required()])
-    submit = SubmitField('comment')
+   
+   username = StringField('Enter your name',validators=[Required()])
+   comment = TextAreaField('Your comment Here', validators=[Required()])
+   submit = SubmitField('Submit')
+

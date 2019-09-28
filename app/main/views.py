@@ -1,18 +1,22 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for, abort
 from . import main
-from .forms import UpdateProfile,BlogForm,CommentForm
+from ..request import get_quote
+from .forms import CommentForm,UpdateProfile,AddPostForm,SubscriptionForm,UpdatePostForm
 from .. import db,photos
-from ..models import User,Blog,Comment
-from flask_login import login_required,current_user
+from ..models import Quote,Post,User,Comment,Subscription
+from flask_login import login_required, current_user
 from ..email import mail_message
 
-@main.route('/')
-def index():
-  title="blog"
-  blog = Blog.query.all()
-  
-  return render_template('index.html',title=title, blog = blog)
 
+@main.route('/', methods = ['GET', 'POST'])
+def index():
+  '''
+    View root page function that returns the index page and its data
+    '''
+    posts=Post.get_posts()
+    title="Welcome "
+
+    return render_template('index.html',title=title,posts=posts)
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -21,6 +25,7 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
+
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
@@ -50,38 +55,97 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
-# 
-@main.route('/blog/new', methods=['GET','POST'])
-def blogs():
-    form = BlogForm()
 
+@main.route('/post/new', methods = ['GET', 'POST'])
+@login_required
+def add_post():
+    form = AddPostForm()
+    
     if form.validate_on_submit():
-        title=form.title.data
-        blog=form.blog.data
+        title = form.title.data
 
-        new_blog=Blog(title = title,blog = blog,user= current_user)
+        post= form.content.data
+        image=form.image.data
 
-        db.session.add(new_blog)
-        db.session.commit()
+        new_post = Post(content=post, title = title,image=image)
+        new_post.save_post()
 
         return redirect(url_for('main.index'))
 
-    return render_template('blog.html',form = form,user= current_user) 
     
-@main.route('/comment/new/<int:id>', methods=['GET','POST'])
-def comments(id):
 
-    form = CommentForm()
+    title = 'Add Post| MeBlog'    
+    return render_template('post.html', title = title, post_form = form)
 
-    if form.validate_on_submit():
-        usernames=form.usernames.data
-        comment=form.comment.data
+@main.route('/post/<int:id>')
+def single_post(id):
+    post=Post.query.filter_by(id=id).first()
+    comments=Comment.get_comments(id=id)
+    return render_template('single_post.html',post=post,comments=comments)
 
-        new_comment= Comment(comment= comment,usernames = usernames,blog_id = id)
-        db.session.add(new_comment)
-        db.session.commit()
+@main.route('/edit/post/<int:id>',methods= ['GET','POST'])
+@login_required
+def update_post(id):
+   post=Post.query.filter_by(id=id).first()
+   if post is None:
+        abort(404)
 
-    comment = Comment.query.filter_by(blog_id=id).all()
-        
+   form=UpdatePostForm()
 
-    return render_template('comment.html',comment = comment, form = form)    
+   if form.validate_on_submit():
+         post.title=form.title.data
+         post.content=form.content.data
+
+         db.session.add(post)
+         db.session.commit()
+
+         return redirect(url_for('main.index'))
+   return render_template('update_post.html',form=form)
+
+@main.route('/new/comment/<int:id>', methods = ['GET','POST'])
+def add_comment(id):
+  post=Post.query.filter_by(id=id).first()
+  if post is None:
+    abort(404)
+
+  form=CommentForm()
+  if form.validate_on_submit():
+     name=form.username.data
+     comment=form.comment.data
+     new_comment=Comment(content=comment ,post=post,username=name)
+     db.session.add(new_comment)  
+     db.session.commit() 
+     
+     return redirect(url_for('main.index'))
+  return render_template('comment.html', comment_form=form)
+
+
+
+@main.route('/delete/comment/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def delete_comment(id):
+    comment=Comment.query.filter_by(id=id).first()
+ 
+
+    if comment is not None:
+       comment.delete_comment()
+       return redirect(url_for('main.index'))
+
+@main.route('/delete/post/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def delete_post(id):
+    post=Post.query.filter_by(id=id).first()
+ 
+
+    if post is not None:
+       post.delete_post(id)
+       return redirect(url_for('main.index'))
+
+ 
+
+
+
+
+
+
+
