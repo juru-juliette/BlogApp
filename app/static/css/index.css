@@ -23,11 +23,11 @@
     background-image: url('/static/photos/pic3.jpg');
     color:white;
   }
-  #sub h2,#sub h3{
+  /* #sub h2,#sub h3{
     margin-left: 340px;
     padding-top: 10px;
   
-  }
+  } */
   
   .name{
     font-size: 10px;
