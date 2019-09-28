@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{%block content%}
+<h1>MeBlog</h1>
+
+<div class="container hh">
+
+  <img src="static/photos/no_dp.png" alt="">
+  <h4>{{post.content}}</h4>
+  <p class="name">Author:Juliette KANGABE</p>
+  <a href="/new/comment/{{post.id}}" class="btn btn-primary">Add comment</a>
+    {{macro.displayComments(comments)}}
+    {%endblock%}
