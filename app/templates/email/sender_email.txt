@@ -1,0 +1,6 @@
+Hello {{user.name}}
+
+There is new Post on MY BLOGAPP
+Title:{{post.title}}
+
+Please check it out

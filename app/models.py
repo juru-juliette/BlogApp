@@ -106,3 +106,12 @@ class Post(db.Model):
          db.session.commit()
        db.session.delete(self)
        db.session.commit()
+class Subscription(db.Model):
+     __tablename__='subscribers'
+
+     id=db.Column(db.Integer,primary_key=True)
+     name=db.Column(db.String(255))
+     email = db.Column(db.String(255),unique = True , index=True)
+     def __repr__(self):
+        return f'{self.email}'
+     

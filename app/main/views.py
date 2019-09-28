@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for, abort
 from . import main
 from ..requests import get_quote
-from .forms import CommentForm,UpdateProfile,AddPostForm,UpdatePostForm
+from .forms import UpdateProfile,AddPostForm,UpdatePostForm,CommentForm,SubscriptionForm
 from .. import db,photos
-from ..models import Quote,User,Post,Comment
+from ..models import User,Post,Comment,Quote,Subscription
 from flask_login import login_required, current_user
 from ..email import mail_message
 
@@ -12,13 +12,22 @@ def index():
   '''
     View root page function that returns the index page and its data
     '''
-  
+  form=SubscriptionForm()
+  if form.validate_on_submit():
+        name = form.name.data
 
-#   return redirect(url_for('main.index'))
+        email= form.email.data
+        new_subscriber=Subscription(name=name,email=email)
+        db.session.add(new_subscriber)
+        db.session.commit()
+
+        mail_message("Thank you for subscribing","email/welcome_user",new_subscriber.email,user=new_subscriber)
+
+        return redirect(url_for('main.index'))
   title="Home| Welcome to MeBlog"
   posts=Post.get_posts()
   quote=get_quote()
-  return render_template('index.html',title=title,posts=posts,quote = quote)
+  return render_template('index.html',title=title,posts=posts,quote = quote,subscription_form=form)
 
 @main.route('/post/<int:id>')
 def single_post(id):
@@ -135,9 +144,6 @@ def update_post(id):
         abort(404)
 
    form=UpdatePostForm()
-#    form.title.data=post.title
-#    form.content.data=post.content
-#    post1=Post.query.filter_by(id=id).first()
    if form.validate_on_submit():
          post.title=form.title.data
          post.content=form.content.data
@@ -147,3 +153,4 @@ def update_post(id):
 
          return redirect(url_for('main.index'))
    return render_template('update_post.html',form=form)
+

@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
-
+{% import "bootstrap/wtf.html" as wtf %}
 <!-- Styles block -->
 
 {% block styles%}
@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>MY Blog</h1>
 
+<h1 id="big" style="color:#6E2C00; text-align: center;font-size:50px;font-style:oblique">WELCOME TO MY BLOGAPP</h1>
 
 <div class="container">
     <div class="row">
@@ -24,7 +24,14 @@
 {{ macro.displayPosts(posts)}}<br>
 <div class="container">
     <a href="/post/new" class="btn btn-primary">Add Blog post</a>
+    <div id="sub">
+        <h3>Do you want to receive notifications when new post is added.</h3>
+        <h2>Subscribe here!!</h2>
+        <div id='subscription' class='container'>
 
+            {{wtf.quick_form(subscription_form)}}
+        </div>
+    </div>
 </div>
 
 
