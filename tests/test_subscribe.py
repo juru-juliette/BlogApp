@@ -4,7 +4,7 @@ from app.models import Subscription
 class SubscriptionModelTest(unittest.TestCase):
 
     def setUp(self):
-        self.new_subscriber = Subscription(id =123,name = 'banana',email='bellaxbx@gmail.com')
+        self.new_subscriber = Subscription(id =123,name = 'banana',email='kangabejuliette@gmail.com')
 
     
     def tearDown(self):
@@ -19,5 +19,5 @@ class SubscriptionModelTest(unittest.TestCase):
         
         self.assertEqual(self.new_subscriber.id,123)
         self.assertEqual(self.new_subscriber.name,"banana")
-        self.assertEqual(self.new_subscriber.email,"bellaxbx@gmail.com")
+        self.assertEqual(self.new_subscriber.email,"kangabejuliette@gmail.com")
        
