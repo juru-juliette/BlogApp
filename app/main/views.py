@@ -1,8 +1,9 @@
 from flask import render_template,request,redirect,url_for, abort
 from . import main
+from ..requests import get_quote
 from .forms import CommentForm,UpdateProfile,AddPostForm,UpdatePostForm
 from .. import db,photos
-from ..models import User,Post,Comment
+from ..models import Quote,User,Post,Comment
 from flask_login import login_required, current_user
 from ..email import mail_message
 
@@ -14,11 +15,10 @@ def index():
   
 
 #   return redirect(url_for('main.index'))
-  
-  posts=Post.get_posts()
   title="Home| Welcome to MeBlog"
-
-  return render_template('index.html',title=title,posts=posts)
+  posts=Post.get_posts()
+  quote=get_quote()
+  return render_template('index.html',title=title,posts=posts,quote = quote)
 
 @main.route('/post/<int:id>')
 def single_post(id):

@@ -34,5 +34,8 @@ def create_app(config_name):
     mail.init_app(app)
     # configure UploadSet
     configure_uploads(app,photos)
+    # setting config
+    from .request import configure_request
+    configure_request(app)
   
     return app

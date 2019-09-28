@@ -5,6 +5,16 @@ from flask_login import UserMixin
 from . import login_manager
 from datetime import datetime
 
+class Quote:
+   '''
+   Quote class to define quote objects
+   '''
+
+   def __init__(self,id,author,content):
+     self.id=id
+     self.author=author
+     self.content=content
+
 class User(UserMixin,db.Model):
     __tablename__='users'
     id = db.Column(db.Integer,primary_key=True)
