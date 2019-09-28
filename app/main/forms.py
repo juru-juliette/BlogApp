@@ -10,7 +10,7 @@ class UpdateProfile(FlaskForm):
 class AddPostForm(FlaskForm):
     title=StringField('Title',validators = [Required()])
     content=TextAreaField('Content',validators = [Required()])
-    image=StringField('Image url',validators = [Required()])
+    # image=StringField('Image url',validators = [Required()])
     submit=SubmitField('SUBMIT')
 
 class UpdatePostForm(FlaskForm):

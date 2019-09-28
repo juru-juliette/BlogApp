@@ -1,20 +1,20 @@
 {% macro displayPosts(posts) %}
 
-{% for post in blogs %}
+{% for post in posts %}
  
   <div class="container rr">
-   <!-- <img src="{{post.image}}" alt=""> -->
+   <img src="{{post.image}}" alt="">
    
-   <h3 style ="color:whitesmoke">{{post.title}}</h3>
-   <p style="color:whitesmoke">Author:Juliette Kangabe</p>
+   <h3 class='title'>{{post.title}}</h3>
+   <p class="name">Author:Juliette KANGABE</p>
 
-   <p>{{blog.blog}}</p>
-   <a href="/blog/{{blog.id}}" class='post'>View comments</a><br>
+   <p>{{post.content}}</p>
+   <a href="/post/{{post.id}}" class='post'>View comments</a><br>
 
   
-  <a href="/new/comment/{{blog.id}}" class="btn btn-primary">Add comment</a>
-  <!-- <a href="/delete/post/{{blog.id}}" class="btn btn-primary">Delete post</a>
-  <a href="/edit/post/{{blog.id}}" class="btn btn-primary">Edit post</a> -->
+  <a href="/new/comment/{{post.id}}" class="btn btn-primary">Add comment</a>
+  <a href="/delete/post/{{post.id}}" class="btn btn-primary">Delete post</a>
+  <a href="/edit/post/{{post.id}}" class="btn btn-primary">Edit post</a>
 </div>
  
 
@@ -24,7 +24,7 @@
   {% macro displayComments(comments) %}
   {% for comment in comments %}
   
-    <div class="kk">
+    <div class="container kk">
     <img src="static/photos/no_dp.png" alt="Display image" height='50' width='50'>
     <h3 class="name">{{comment.username}}</h3>
     

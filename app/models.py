@@ -5,16 +5,6 @@ from flask_login import UserMixin
 from . import login_manager
 from datetime import datetime
 
-# class Quote:
-#    '''
-#    Quote class to define quote objects
-#    '''
-
-#    def __init__(self,id,author,content):
-#      self.id=id
-#      self.author=author
-#      self.content=content
-    
 class User(UserMixin,db.Model):
     __tablename__='users'
     id = db.Column(db.Integer,primary_key=True)
@@ -77,8 +67,6 @@ class Post(db.Model):
     id= db.Column(db.Integer,primary_key= True)
     title=db.Column(db.String(255))
     content = db.Column(db.String(500))
-    image=db.Column(db.String(500))
-   
     comments = db.relationship('Comment',backref='post' ,lazy='dynamic')
 
 
@@ -108,13 +96,3 @@ class Post(db.Model):
          db.session.commit()
        db.session.delete(self)
        db.session.commit()
-
-
-# class Subscription(db.Model):
-#      __tablename__='subscribers'
-
-#      id=db.Column(db.Integer,primary_key=True)
-#      name=db.Column(db.String(255))
-#      email = db.Column(db.String(255),unique = True , index=True)
-     
-     
