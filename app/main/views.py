@@ -57,15 +57,11 @@ def add_post():
         title = form.title.data
 
         post= form.content.data
-        image=form.image.data
 
-        new_post = Post(content=post, title = title,image=image)
+        new_post = Post(content=post, title = title)
         new_post.save_post()
 
-        subscribers=Subscription.query.all()
-        for subscriber in subscribers:
-           mail_message("New Post","email/send_email",subscriber.email,user=subscriber,post=new_post)
-
+        
         return redirect(url_for('main.index'))
 
     
