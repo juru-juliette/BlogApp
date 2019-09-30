@@ -6,7 +6,7 @@
 {% block styles%}
 {{ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock %}
+{% endblock %} 
 
 {% block content %}
 
@@ -15,6 +15,7 @@
 <div class="container">
     <div class="row">
         <blockquote class="text-center text-lg">
+            <h1 style="color:#6E2C00; text-align: center">Random Quote</h1>
             <p>{{quote.content}}</p>
             <footer><cite>{{quote.author}}</cite></footer>
         </blockquote>
@@ -32,6 +33,11 @@
             {{wtf.quick_form(subscription_form)}}
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="footer">
+        <h4 style="text-align: center;background-color: grey;font-style:oblique;font-size: 20px">&copy;Juliette Kangabe,2019 All right reseved.</h4>
+     </div>
 </div>
 
 

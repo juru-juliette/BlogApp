@@ -1,36 +1,41 @@
 {% macro displayPosts(posts) %}
 
 {% for post in posts %}
- 
-  <div class="container rr">
 
-   <h3 class='title'>{{post.title}}</h3>
-   <img src="static/photos/mine.jpg" alt="Display image" height='90' width='90'>
-   <p class="name"style="color:#EEEEEE ;font-size:15px ;font-style:oblique">Author:Juliette Kangabe</p>
+<div class="container rr">
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class='title'>{{post.title}}</h3>
+      <img src="static/photos/mine.jpg" alt="Display image" height='90' width='90'>
+      <p class="name" style="color:#EEEEEE ;font-size:15px ;font-style:oblique">Author:Juliette Kangabe</p>
 
-   <p>{{post.content}}</p>
-   <a href="/post/{{post.id}}" class='post'>View comments</a><br>
+      <p>{{post.content}}</p>
+      <a href="/post/{{post.id}}" class='post'>View comments</a><br>
 
-  
-  <a href="/new/comment/{{post.id}}" class="btn btn-primary">Add comment</a>
-  <a href="/delete/post/{{post.id}}" class="btn btn-primary">Delete post</a>
-  <a href="/edit/post/{{post.id}}" class="btn btn-primary">Edit post</a>
+
+      <a href="/new/comment/{{post.id}}" class="btn btn-primary">Add comment</a>
+      <a href="/delete/post/{{post.id}}" class="btn btn-primary">Delete post</a>
+      <a href="/edit/post/{{post.id}}" class="btn btn-primary">Edit post</a>
+    </div>
+
+  </div>
+
 </div>
- 
 
-  {%endfor%}
-  {%endmacro%}
 
-  {% macro displayComments(comments) %}
-  {% for comment in comments %}
-  
-    <div class="container kk">
-    <img src="static/photos/no_dp.png" alt="Display image" height='50' width='50'>
-    <h3 class="name">{{comment.username}}</h3>
-    
-      <p>{{comment.content}}</p>
-      <a href="/delete/comment/{{comment.id}}" class="btn btn-primary">Delete Comment</a>
-      </div>
-      
-  {%endfor%}
-  {%endmacro%}
+{%endfor%}
+{%endmacro%}
+
+{% macro displayComments(comments) %}
+{% for comment in comments %}
+
+<div class="container kk">
+  <img src="static/photos/pic2.jpg" alt="Display image" height='50' width='50'>
+  <h3 class="name">{{comment.username}}</h3>
+
+  <p>{{comment.content}}</p>
+  <a href="/delete/comment/{{comment.id}}" class="btn btn-primary">Delete Comment</a>
+</div>
+
+{%endfor%}
+{%endmacro%}
