@@ -11,7 +11,7 @@ Blog is a web application where user can post the quote and see the blogs.and ca
 ## App Specifications
 ### (SPECs)The following is what my program should handle:
 
-user can view blogs post. user can write comments on the comment text area box.the name also is required.then the comment is displayed on the blog content. you fill subscription form that user can receive a subscription confirmation email.
+user can view blogs post. user can write comments on the comment text area box.the name also is required.then the comment is displayed on the blog content. you fill subscription form if she/he wants to get all post updates after that user can receive a subscription confirmation email.
 
 ### Bugs
 SQLAlchemy errors,page not found
