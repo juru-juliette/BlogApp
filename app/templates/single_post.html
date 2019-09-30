@@ -8,11 +8,15 @@
 {%block content%}
 <h1 style="text-align: center">My Blog</h1>
 
-<div class="container hh">
+<div class="container">
 
-  <img src="static/photos/no_dp.png" alt="">
-  <h4>{{post.content}}</h4>
-  <p class="name">Author:Juliette KANGABE</p>
-  <a href="/new/comment/{{post.id}}" class="btn btn-primary">Add comment</a>
-    {{macro.displayComments(comments)}}
-    {%endblock%}
+  <!-- <img src="static/photos/pic2.png" alt=""> -->
+  <div class="row">
+    <div class="col-md-4">
+        <h4>{{post.content}}</h4>
+        <p class="name">Author:Juliette KANGABE</p>
+        <a href="/new/comment/{{post.id}}" class="btn btn-primary">Add comment</a>
+        {{macro.displayComments(comments)}}
+    </div>
+  </div>
+  {%endblock%}

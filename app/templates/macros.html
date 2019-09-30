@@ -2,7 +2,7 @@
 
 {% for post in posts %}
 
-<div class="container rr">
+<div class="container">
   <div class="row">
     <div class="col-md-4">
       <h3 class='title'>{{post.title}}</h3>
@@ -29,8 +29,8 @@
 {% macro displayComments(comments) %}
 {% for comment in comments %}
 
-<div class="container kk">
-  <img src="static/photos/pic2.jpg" alt="Display image" height='50' width='50'>
+<div class="container">
+  <!-- <img src="static/photos/pic2.png" alt="Display image" height='50' width='50'> -->
   <h3 class="name">{{comment.username}}</h3>
 
   <p>{{comment.content}}</p>

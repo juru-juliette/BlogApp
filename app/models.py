@@ -43,6 +43,37 @@ class User(UserMixin,db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
+class Post(db.Model):
+    __tablename__= 'posts'
+    
+    id= db.Column(db.Integer,primary_key= True)
+    title=db.Column(db.String(255))
+    content = db.Column(db.String(500))
+    comments = db.relationship('Comment',backref='post' ,lazy='dynamic')
+
+
+    def save_post(self):
+        db.session.add(self)
+        db.session.commit()
+
+    # @classmethod
+    # def clear_posts(cls):
+    #     Post.all_posts.clear()
+
+    @classmethod
+    def get_posts(cls):
+        posts = Post.query.all()
+        return posts
+
+    def delete_post(self, id):
+       comments = Comment.query.filter_by(id=id).all()
+       for comment in comments:
+         db.session.delete(comment)
+         db.session.commit()
+       db.session.delete(self)
+       db.session.commit()
+
 class Comment(db.Model):
     __tablename__= 'comments'
     
@@ -58,10 +89,6 @@ class Comment(db.Model):
         db.session.commit()
 
     @classmethod
-    def clear_comments(cls):
-        Comment.all_comments.clear()
-
-    @classmethod
     def get_comments(cls,id):
         comments = Comment.query.filter_by(post_id=id).all()
         return comments
@@ -71,41 +98,6 @@ class Comment(db.Model):
        db.session.delete(self)
        db.session.commit()
 
-class Post(db.Model):
-    __tablename__= 'posts'
-    
-    id= db.Column(db.Integer,primary_key= True)
-    title=db.Column(db.String(255))
-    content = db.Column(db.String(500))
-    comments = db.relationship('Comment',backref='post' ,lazy='dynamic')
-
-
-    def save_post(self):
-        db.session.add(self)
-        db.session.commit()
-
-    @classmethod
-    def clear_posts(cls):
-        Post.all_posts.clear()
-
-    @classmethod
-    def get_posts(cls):
-        posts = Post.query.all()
-        return posts
-
-    
-    @classmethod
-    def get_post(cls,id):
-        post = Post.query.filter_by(id=id).all()
-        return post
-
-    def delete_post(self, id):
-       comments = Comment.query.filter_by(id=id).all()
-       for comment in comments:
-         db.session.delete(comment)
-         db.session.commit()
-       db.session.delete(self)
-       db.session.commit()
 class Subscription(db.Model):
      __tablename__='subscribers'
 
