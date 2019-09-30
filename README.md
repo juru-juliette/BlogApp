@@ -1,7 +1,7 @@
 # BlogApp
  this is a personal blogging website where you can create and share your opinions and other users can read and comment on them.
  ## Description
-Blog is a web application where user can post the quote and see the blogs.and can subscribes to get the latest updates on post. Users can subscribe to the blog to get the latest updates on articles.The blog supports comments from readers and blog writers can determine whether to delete the comments or not. Users can also delete blog posts at their discretion.After the writer has posted a new blog post, subscribers will receive an email notification with a link to the blog post.
+Blog is a web application where user can post the quote and see the blogs.and can subscribes to get the latest updates on post. Users can subscribe to the blog to get the latest updates on articles.The blog supports comments from readers and blog writers can determine whether to delete the comments or not. 
 ## Installation Requirements
 * Python3.6
 * Pip
@@ -11,7 +11,7 @@ Blog is a web application where user can post the quote and see the blogs.and ca
 ## App Specifications
 ### (SPECs)The following is what my program should handle:
 
-user can view blogs click on article and view the whole blog post. and it display the whole blogs. user can write comments on the comment test area box.the name also is required.then the comment is displayed on the blog content. you fill subscription form that user can receive a subscription confirmation email.
+user can view blogs post. user can write comments on the comment text area box.the name also is required.then the comment is displayed on the blog content. you fill subscription form that user can receive a subscription confirmation email.
 
 ### Bugs
 SQLAlchemy errors,page not found
