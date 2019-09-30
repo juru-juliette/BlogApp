@@ -12,22 +12,11 @@ def index():
   '''
     View root page function that returns the index page and its data
     '''
-  form=SubscriptionForm()
-  if form.validate_on_submit():
-        name = form.name.data
-
-        email= form.email.data
-        new_subscriber=Subscription(name=name,email=email)
-        db.session.add(new_subscriber)
-        db.session.commit()
-
-        mail_message("Thank you for subscribing","email/welcome_user",new_subscriber.email,user=new_subscriber)
-
-        return redirect(url_for('main.index'))
+ 
   title="Home| Welcome to BlogApp"
   posts=Post.get_posts()
   quote=get_quote()
-  return render_template('index.html',title=title,posts=posts,quote = quote,subscription_form=form)
+  return render_template('index.html',title=title,posts=posts,quote = quote)
 
 @main.route('/post/new', methods = ['GET', 'POST'])
 @login_required
@@ -151,4 +140,17 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+@main.route('/subscription/fill/',methods = ['GET', 'POST'])
+def subscription ():
+    form=SubscriptionForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email= form.email.data
+        new_subscriber=Subscription(name=name,email=email)
+        db.session.add(new_subscriber)
+        db.session.commit()
 
+        mail_message("Thank you for subscribing","email/welcome_user",new_subscriber.email,new_subscriber=new_subscriber)
+
+        return redirect(url_for('main.index'))
+    return render_template('subscribe.html',subscription_form=form)

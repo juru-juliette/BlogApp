@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField,StringField,SubmitField
-from wtforms.validators import Required
-from ..models import User
+from wtforms.validators import Required,Email
+from wtforms import ValidationError
+from ..models import User,Subscription
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
@@ -24,6 +25,13 @@ class CommentForm(FlaskForm):
    submit = SubmitField('Submit')
 class SubscriptionForm(FlaskForm):
     name=StringField('Name',validators =[Required()])
-    email=StringField('Email',validators =[Required()])
+    email=StringField('Email',validators =[Required(),Email()])
     submit = SubmitField('Submit')
+    def validate_email(self,data_field):
+        if Subscription.query.filter_by(email =data_field.data).first():
+            raise ValidationError('There is an account with that email')
+
+    def validate_name(self,data_field):
+        if Subscription.query.filter_by(name = data_field.data).first():
+            raise ValidationError('That name is taken')
 

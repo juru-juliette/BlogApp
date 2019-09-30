@@ -5,17 +5,18 @@
 
 {% block styles%}
 {{ super() }}
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %} 
 
 {% block content %}
 
-<h1 id="big" style="color:#6E2C00; text-align: center;font-size:50px;font-style:oblique">WELCOME TO MY BLOGAPP</h1>
+<h1 id="big" style="color:#6E2C00; text-align:center;font-family: 'Open Sans Condensed', sans-serif;font-size:50px;font-style:oblique">WELCOME TO MY BLOGAPP</h1>
 
 <div class="container">
     <div class="row">
         <blockquote class="text-center text-lg">
-            <h1 style="color:#6E2C00; text-align: center">Random Quote</h1>
+            <h1 style="color:#6E2C00; text-align: center;font-family: 'Open Sans Condensed', sans-serif">Random Quote</h1>
             <p>{{quote.content}}</p>
             <footer><cite>{{quote.author}}</cite></footer>
         </blockquote>
@@ -25,14 +26,8 @@
 {{ macro.displayPosts(posts)}}<br>
 <div class="container">
     <a href="/post/new" class="btn btn-primary">Add Blog post</a>
-    <div id="sub">
-        <h3>Do you want to receive notifications when new post is added.</h3>
-        <h2>Subscribe here!!</h2>
-        <div id='subscription' class='container'>
-
-            {{wtf.quick_form(subscription_form)}}
-        </div>
-    </div>
+    <button><a href="/subscription/fill/">subscribe</a></button>
+    
 </div>
 <div class="row">
     <div class="footer">
