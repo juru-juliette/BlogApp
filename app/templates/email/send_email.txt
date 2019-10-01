@@ -1,0 +1,4 @@
+Hello {{user.username}}
+There is a new Post on Personal Blog Post
+Title:{{post.title}}
+Kindly check To know what's going On
