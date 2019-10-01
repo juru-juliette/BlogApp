@@ -4,12 +4,9 @@ from app.models import User,Post,Comment,Subscription
 from  flask_migrate import Migrate, MigrateCommand
 
 # Creating app instance
-app = create_app('production')
-# app = create_app('test')
-
+app = create_app('development')
 manager = Manager(app)
 manager.add_command('server',Server)
-
 @manager.command
 def test():
     """Run the unit tests."""

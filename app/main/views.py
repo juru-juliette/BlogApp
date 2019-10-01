@@ -49,8 +49,6 @@ def single_post(id):
 @login_required
 def delete_post(id):
     post=Post.query.filter_by(id=id).first()
- 
-
     if post is not None:
        post.delete_post(id)
        return redirect(url_for('main.index'))
