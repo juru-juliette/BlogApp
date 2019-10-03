@@ -7,33 +7,46 @@
 {{ super() }}
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock %} 
+{% endblock %}
 
 {% block content %}
 
-<h1 id="big" style="color:#6E2C00; text-align:center;font-family: 'Open Sans Condensed', sans-serif;font-size:50px;font-style:oblique">WELCOME TO MY BLOGAPP</h1>
+<h1 id="big"
+    style="color:#6E2C00; text-align:center;font-family: 'Open Sans Condensed', sans-serif;font-size:50px;font-style:oblique">
+    WELCOME TO MY BLOGAPP</h1>
 
 <div class="container">
     <div class="row">
         <blockquote class="text-center text-lg">
-            <h1 style="color:#6E2C00; text-align: center;font-family: 'Open Sans Condensed', sans-serif">Random Quote</h1>
+            <h1 style="color:#6E2C00; text-align: center;font-family: 'Open Sans Condensed', sans-serif">Random Quote
+            </h1>
             <p>{{quote.content}}</p>
             <footer><cite>{{quote.author}}</cite></footer>
         </blockquote>
     </div>
 
 </div>
-{{ macro.displayPosts(posts)}}<br>
-<div class="container">
-    <a href="/post/new" class="btn btn-primary">Add Blog post</a>
-    click here for
-    <button><a href="/subscription/fill/"style="color: rgb(70, 2, 2);font-size:20px">subscribe</a></button>
-    
+<div class="row">
+
+
+    <main role="main" class="container">
+
+        <div class="col-md-8">
+            {{ macro.displayPosts(posts)}}<br>
+            <a href="/post/new" class="btn btn-primary">Add Blog post</a>
+        </div>
+        <div class="col-md-4">
+            <p style="font-size: 30px">And you can subscribes to get the latest updates on post <br>click here for</p>
+            <button><a href="/subscription/fill/" style="color: rgb(70, 2, 2);font-size:20px">subscribe</a></button>
+        </div>
+
+    </main>
 </div>
 <div class="row">
     <div class="footer">
-        <h4 style="text-align: center;background-color: grey;font-style:oblique;font-size: 20px">&copy;Juliette Kangabe,2019 All right reseved.</h4>
-     </div>
+        <h4 style="text-align: center;background-color: grey;font-style:oblique;font-size: 20px">&copy;Juliette
+            Kangabe,2019 All right reseved.</h4>
+    </div>
 </div>
 
 
